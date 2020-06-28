@@ -1,6 +1,5 @@
 # Default ignored files
 .idea
 .target
-/*.iml
+*.iml
 /.idea/
-/list_stack.iml

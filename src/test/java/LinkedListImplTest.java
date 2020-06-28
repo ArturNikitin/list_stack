@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedListImplTest {
-    private LinkedListImpl<String> list;
+    private LinkedList<String> list;
 
     @BeforeEach
     void setUp() {
@@ -13,6 +13,11 @@ class LinkedListImplTest {
         list.add("First");
         list.add("Second");
         list.add("Third");
+    }
+
+    @Test
+    void size() {
+        assertEquals(3, list.size());
     }
 
     @Test
@@ -40,37 +45,69 @@ class LinkedListImplTest {
 
     @Test
     void addFirst() {
+        list.addFirst("NewFirst");
+        assertEquals("NewFirst", list.getFirst());
     }
 
     @Test
     void addLast() {
-    }
-
-    @Test
-    void removeLast() {
+        list.addLast("NewFirst");
+        assertEquals("NewFirst", list.getLast());
     }
 
     @Test
     void removeFirst() {
+        list.removeFirst();
+        assertEquals("Second", list.getFirst());
     }
 
     @Test
     void addAfter() {
+        assertEquals("Third", list.getLast());
+        list.addAfter("Third", "Fourth");
+        assertEquals("Fourth", list.getLast());
     }
 
     @Test
-    void contains() {
+    void containsTrue() {
+        boolean result = list.contains("Third");
+        assertTrue(result);
     }
 
     @Test
-    void size() {
+    void containsFalse() {
+        assertFalse(list.contains("Fourth"));
     }
 
     @Test
     void getFirst() {
+        assertEquals("First", list.getFirst());
     }
 
     @Test
     void getLast() {
+        assertEquals("Third", list.getLast());
+    }
+
+    @Test
+    void reverse() {
+        String first = list.getFirst();
+        String last = list.getLast();
+        list.reverse();
+        assertEquals(first, list.getLast());
+        assertEquals(last, list.getFirst());
+
+    }
+    @Test
+    void reverseMoreValues() {
+        list.add("oops");
+        list.add("well");
+        String first = list.getFirst();
+        String last = list.getLast();
+        list.reverse();
+        assertEquals(first, list.getLast());
+        assertEquals(last, list.getFirst());
+        list.remove("well");
+        assertEquals("oops", list.getFirst());
     }
 }
